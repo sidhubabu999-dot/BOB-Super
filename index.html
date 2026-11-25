@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOB Super - Bihar Online Bazaar Super</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #087b43;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: 25px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 16px;
+      box-shadow: 0 4px 18px #00000012;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .roles {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .roles button {
+      flex: 1;
+      padding: 13px;
+      border: 2px solid #087b43;
+      border-radius: 10px;
+      background: white;
+      color: #087b43;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .roles button.active {
+      background: #087b43;
+      color: white;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+
+    .main-btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #087b43;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 18px;
+      color: #087b43;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>BOB Super</h1>
+  <p>Bihar Online Bazaar Super</p>
+  <p>हर सामान आपके घर तक</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2 id="formTitle">Create Account</h2>
+
+    <div class="roles">
+      <button id="customerBtn"
+        class="active"
+        onclick="selectRole('customer')">
+        Customer
+      </button>
+
+      <button id="shopkeeperBtn"
+        onclick="selectRole('shopkeeper')">
+        Shopkeeper
+      </button>
+    </div>
+
+    <form id="accountForm">
+
+      <input
+        id="name"
+        type="text"
+        placeholder="पूरा नाम"
+        required>
+
+      <input
+        id="mobile"
+        type="tel"
+        placeholder="मोबाइल नंबर"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        required>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="Email (वैकल्पिक)">
+
+      <input
+        id="password"
+        type="password"
+        placeholder="Password"
+        minlength="8"
+        required>
+
+      <div id="shopFields" hidden>
+        <input
+          id="shopName"
+          type="text"
+          placeholder="दुकान का नाम">
+
+        <input
+          id="shopAddress"
+          type="text"
+          placeholder="दुकान का पूरा पता">
+
+        <input
+          id="shopDistrict"
+          type="text"
+          placeholder="जिला">
+
+        <input
+          id="shopPincode"
+          type="text"
+          placeholder="पिनकोड">
+      </div>
+
+      <button class="main-btn" type="submit">
+        Create Account
+      </button>
+
+    </form>
+
+    <p class="switch" onclick="toggleMode()">
+      Already have an account? Login
+    </p>
+
+    <p class="message" id="message"></p>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 BOB Super | Bihar Online Bazaar Super
+</footer>
+
+<script>
+  let selectedRole = "customer";
+  let loginMode = false;
+
+  function selectRole(role) {
+    selectedRole = role;
+
+    document.getElementById("customerBtn")
+      .classList.toggle("active", role === "customer");
+
+    document.getElementById("shopkeeperBtn")
+      .classList.toggle("active", role === "shopkeeper");
+
+    document.getElementById("shopFields").hidden =
+      role !== "shopkeeper";
+  }
+
+  function toggleMode() {
+    loginMode = !loginMode;
+
+    document.getElementById("formTitle").textContent =
+      loginMode ? "Login" : "Create Account";
+
+    document.querySelector(".main-btn").textContent =
+      loginMode ? "Login" : "Create Account";
+
+    document.querySelector(".switch").textContent =
+      loginMode
+        ? "Create a new account"
+        : "Already have an account? Login";
+  }
+
+  document.getElementById("accountForm")
+    .addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      document.getElementById("message").textContent =
+        "BOB Super का Backend जोड़ना बाकी है।";
+
+      alert(
+        "BOB Super: " +
+        (selectedRole === "customer"
+          ? "Customer"
+          : "Shopkeeper") +
+        " account form तैयार है।"
+      );
+    });
+</script>
+
+</body>
+  </html>
+  
